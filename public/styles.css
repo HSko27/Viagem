@@ -1,0 +1,29 @@
+/* Skryje nativní obrys canvasu, aniž by omezil ovládání mapy. */
+#map .maplibregl-canvas {
+  outline: none;
+}
+
+/* Sladí mapové okno se zaoblením zbytku rozhraní. */
+#map .maplibregl-popup-content {
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+/* Základní vzhled tlačítek pro rychlý přesun do měst okresu. */
+.location-button {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  color: #334155;
+  font-size: 0.875rem;
+  text-align: left;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* Viditelný stav najetí a klávesnicového zaměření. */
+.location-button:hover,
+.location-button:focus-visible {
+  border-color: #6ee7b7;
+  background: #ecfdf5;
+  outline: none;
+}

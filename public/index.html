@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8fafc">
+    <title>Parcely Jičínska</title>
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/proj4@2.11.0/dist/proj4.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <link href="/styles.css" rel="stylesheet">
+  </head>
+  <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+    <main class="mx-auto flex min-h-screen max-w-screen-2xl flex-col gap-5 p-4 sm:p-6">
+      <!-- Záhlaví nese název mapy a živý stav načítání dat. -->
+      <header class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h1 class="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">Parcely Jičínska</h1>
+        </div>
+        <div class="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm">
+          <span id="status-indicator" class="h-2 w-2 rounded-full bg-slate-400" aria-hidden="true"></span>
+          <span id="status-message" role="status" aria-live="polite">Připravuji mapu…</span>
+        </div>
+      </header>
+
+      <!-- Hlavní rozvržení spojuje interaktivní mapu s panelem podrobností. -->
+      <section class="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <!-- Mapový podklad a parcelní vrstva se vykreslují do tohoto kontejneru. -->
+        <div class="relative min-h-[65vh] overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm">
+          <div id="map" class="absolute inset-0" aria-label="Mapa katastrálních parcel"></div>
+          <div class="pointer-events-none absolute left-3 top-3 rounded-lg bg-white/95 px-3 py-2 text-xs text-slate-600 shadow">
+            Klikněte na parcelu pro podrobnější informace.
+          </div>
+        </div>
+
+        <!-- Panel obsahuje rychlé lokality a údaje o právě vybrané parcele. -->
+        <aside class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div>
+            <h2 class="text-lg font-semibold">Informace o parcele</h2>
+            <p class="mt-1 text-sm leading-6 text-slate-600">Vyberte parcelu na mapě a zobrazí se údaje dostupné ve zdroji ČÚZK.</p>
+          </div>
+          <div class="border-t border-slate-100 pt-4">
+            <h3 class="text-sm font-medium text-slate-700">Rychlý přesun v okrese</h3>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <button class="location-button" type="button" data-longitude="15.35" data-latitude="50.437">Jičín</button>
+              <button class="location-button" type="button" data-longitude="15.18" data-latitude="50.47">Sobotka</button>
+              <button class="location-button" type="button" data-longitude="15.63" data-latitude="50.36">Hořice</button>
+              <button class="location-button" type="button" data-longitude="15.49" data-latitude="50.5">Nová Paka</button>
+            </div>
+          </div>
+          <dl id="parcel-details" class="space-y-4 border-t border-slate-100 pt-4 text-sm">
+            <div>
+              <dt class="text-slate-500">Identifikátor ČÚZK</dt>
+              <dd class="mt-1 font-medium text-slate-900">Zatím není vybrána parcela</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+    </main>
+
+    <!-- Aplikační logika se spustí po načtení dokumentu. -->
+    <script src="/app.js" defer></script>
+  </body>
+</html>
